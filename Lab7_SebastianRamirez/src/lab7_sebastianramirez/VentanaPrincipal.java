@@ -11,9 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.security.cert.CRLReason;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -26,6 +29,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         setLocationRelativeTo(null);
+        if(new File("./Eventos.sr").exists()){
+            adminBinario a = new adminBinario();
+            ArrayList <Evento> eventos = a.getEventos();
+            if(eventos.size()>=1){
+                try{
+                    DefaultComboBoxModel modelo = (DefaultComboBoxModel)ComboBox_Eventos.getModel();
+                    for (Evento e : eventos) {
+                    modelo.addElement(e);
+                    }
+                    ComboBox_Eventos.setModel(modelo);
+                }catch (Exception ex) {
+                    
+                }
+            }
+        }
         initComponents();
     }
 
@@ -78,9 +96,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Edad_Usuario = new javax.swing.JTextField();
         CrearBanda1 = new javax.swing.JButton();
         Solista = new javax.swing.JDialog();
-        Banda = new javax.swing.JDialog();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         Usuario = new javax.swing.JDialog();
+        ComboBox_Eventos = new javax.swing.JComboBox<>();
+        jButton7 = new javax.swing.JButton();
         Leo = new javax.swing.JDialog();
+        Evento = new javax.swing.JDialog();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        Evento_Lugar = new javax.swing.JTextField();
+        Evento_Ciudad = new javax.swing.JTextField();
+        Evento_Fecha = new com.toedter.calendar.JDateChooser();
+        jLabel24 = new javax.swing.JLabel();
+        Evento_Personas = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        Cancion = new javax.swing.JDialog();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        Nombre_Cancion = new javax.swing.JTextField();
+        Cancion_Duracion = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -359,37 +396,64 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
 
+        jButton3.setText("Crear Evento");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        jButton4.setText("Crear Cancion");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout SolistaLayout = new javax.swing.GroupLayout(Solista.getContentPane());
         Solista.getContentPane().setLayout(SolistaLayout);
         SolistaLayout.setHorizontalGroup(
             SolistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(SolistaLayout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addGroup(SolistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         SolistaLayout.setVerticalGroup(
             SolistaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(SolistaLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout BandaLayout = new javax.swing.GroupLayout(Banda.getContentPane());
-        Banda.getContentPane().setLayout(BandaLayout);
-        BandaLayout.setHorizontalGroup(
-            BandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        BandaLayout.setVerticalGroup(
-            BandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        ComboBox_Eventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos" }));
+
+        jButton7.setText("Ir a evento");
 
         javax.swing.GroupLayout UsuarioLayout = new javax.swing.GroupLayout(Usuario.getContentPane());
         Usuario.getContentPane().setLayout(UsuarioLayout);
         UsuarioLayout.setHorizontalGroup(
             UsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(UsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ComboBox_Eventos, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton7)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         UsuarioLayout.setVerticalGroup(
             UsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(UsuarioLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(UsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBox_Eventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout LeoLayout = new javax.swing.GroupLayout(Leo.getContentPane());
@@ -401,6 +465,122 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         LeoLayout.setVerticalGroup(
             LeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jLabel18.setText("Lugar");
+
+        jLabel22.setText("Ciudad");
+
+        jLabel23.setText("Fecha");
+
+        jLabel24.setText("Capacidad de Personas");
+
+        jButton5.setText("Crear Evento");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EventoLayout = new javax.swing.GroupLayout(Evento.getContentPane());
+        Evento.getContentPane().setLayout(EventoLayout);
+        EventoLayout.setHorizontalGroup(
+            EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EventoLayout.createSequentialGroup()
+                .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EventoLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(EventoLayout.createSequentialGroup()
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Evento_Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(EventoLayout.createSequentialGroup()
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Evento_Ciudad))
+                                .addGroup(EventoLayout.createSequentialGroup()
+                                    .addComponent(jLabel18)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(Evento_Lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(EventoLayout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(18, 18, 18)
+                                .addComponent(Evento_Personas, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(EventoLayout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(140, Short.MAX_VALUE))
+        );
+        EventoLayout.setVerticalGroup(
+            EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EventoLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(Evento_Lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(Evento_Ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23)
+                    .addComponent(Evento_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(EventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(Evento_Personas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+
+        jLabel25.setText("Nombre");
+
+        jLabel26.setText("Duracion");
+
+        jButton6.setText("Crear");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CancionLayout = new javax.swing.GroupLayout(Cancion.getContentPane());
+        Cancion.getContentPane().setLayout(CancionLayout);
+        CancionLayout.setHorizontalGroup(
+            CancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CancionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CancionLayout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Nombre_Cancion, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CancionLayout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(18, 18, 18)
+                        .addGroup(CancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                            .addComponent(Cancion_Duracion))))
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        CancionLayout.setVerticalGroup(
+            CancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CancionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(Nombre_Cancion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(Cancion_Duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jButton6)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -485,6 +665,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             os.flush();
             os.close();
             fs.close();
+            Thread.sleep(5000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -507,6 +688,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             os.flush();
             os.close();
             fs.close();
+            Thread.sleep(5000);
         }catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -529,6 +711,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             os.flush();
             os.close();
             fs.close();
+            Thread.sleep(5000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -567,9 +750,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         for (Banda b : bandas) {
             if (TextField_user.getText().equals(b.getUsuario())&&jPasswordField1.getText().equals(b.getContraseña())) {
-                Banda.pack();
-                Banda.setLocationRelativeTo(this);
-                Banda.setVisible(true);
+                Solista.pack();
+                Solista.setLocationRelativeTo(this);
+                Solista.setVisible(true);
                 break;
             }
         }
@@ -582,6 +765,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        Evento();
+    }//GEN-LAST:event_jButton3MouseClicked
+    
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        File archivo = new File("./Eventos.sr");
+        FileOutputStream fs = null;
+        ObjectOutputStream os = null;
+        try{
+            fs = new FileOutputStream(archivo);
+            os = new ObjectOutputStream(fs);
+            os.writeObject(new Evento(Evento_Fecha.getDate(), Evento_Ciudad.getText(), Evento_Lugar.getText(), Evento_Personas.getText()));
+            os.flush();
+            os.close();
+            fs.close();
+            Thread.sleep(8000);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        Evento_Fecha.setDate(new Date());
+        Evento_Ciudad.setText("");
+        Evento_Lugar.setText("");
+        Evento_Personas.setText("");
+        Evento.setVisible(false);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        Cancion();
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        File archivo = new File("./Canciones.sr");
+        FileOutputStream fs = null;
+        ObjectOutputStream os = null;
+        try{
+            fs = new FileOutputStream(archivo);
+            os = new ObjectOutputStream(fs);
+            os.writeObject(new Canciones(Nombre_Cancion.getText(), Cancion_Duracion.getText()));
+            os.flush();
+            os.close();
+            fs.close();
+            Thread.sleep(8000);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        Nombre_Cancion.setText("");
+        Cancion_Duracion.setText("");
+        Cancion.setVisible(false);
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -619,8 +852,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog Banda;
     private javax.swing.JTextField Banda_Nombre;
+    private javax.swing.JDialog Cancion;
+    private javax.swing.JTextField Cancion_Duracion;
+    private javax.swing.JComboBox<String> ComboBox_Eventos;
     private javax.swing.JPasswordField Contraseña_Banda;
     private javax.swing.JPasswordField Contraseña_Solista;
     private javax.swing.JPasswordField Contraseña_Usuario;
@@ -629,10 +864,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton CrearSolista;
     private javax.swing.JTextField Edad_Solista;
     private javax.swing.JTextField Edad_Usuario;
+    private javax.swing.JDialog Evento;
+    private javax.swing.JTextField Evento_Ciudad;
+    private com.toedter.calendar.JDateChooser Evento_Fecha;
+    private javax.swing.JTextField Evento_Lugar;
+    private javax.swing.JTextField Evento_Personas;
     private javax.swing.JTextField Genero_Banda;
     private javax.swing.JTextField Genero_Solista;
     private javax.swing.JTextField Integrantes;
     private javax.swing.JDialog Leo;
+    private javax.swing.JTextField Nombre_Cancion;
     private javax.swing.JDialog Registro;
     private javax.swing.JDialog Solista;
     private javax.swing.JTextField Solista_Nombre;
@@ -644,6 +885,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField Usuario_Usario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -653,10 +899,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -670,4 +922,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+    public void Evento(){
+        Evento.pack();
+        Evento.setLocationRelativeTo(this);
+        Evento.setVisible(true);
+    }
+    public void Cancion(){
+        Cancion.pack();
+        Cancion.setLocationRelativeTo(this);
+        Cancion.setVisible(true);
+    }
 }

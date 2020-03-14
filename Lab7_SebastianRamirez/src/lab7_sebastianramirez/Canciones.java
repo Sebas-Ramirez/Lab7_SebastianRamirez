@@ -1,5 +1,8 @@
 package lab7_sebastianramirez;
-public class Canciones {
+
+import java.io.Serializable;
+
+public class Canciones implements Serializable{
     private String nombre,duracion;
 
     public Canciones(String nombre, String duracion) {

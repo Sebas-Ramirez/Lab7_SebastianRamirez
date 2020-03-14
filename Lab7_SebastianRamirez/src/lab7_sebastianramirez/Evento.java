@@ -1,8 +1,9 @@
 package lab7_sebastianramirez;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Evento {
+public class Evento implements Serializable {
     private Date fecha;
     private String Ciudad, Lugar, Capacidad_de_Personas;
 
@@ -43,6 +44,11 @@ public class Evento {
 
     public void setCapacidad_de_Personas(String Capacidad_de_Personas) {
         this.Capacidad_de_Personas = Capacidad_de_Personas;
+    }
+
+    @Override
+    public String toString() {
+        return Lugar;
     }
     
 }
